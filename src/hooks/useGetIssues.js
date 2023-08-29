@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getIssue } from '../api/function';
 
-const useGetIssues = (owner, repo, perPage) => {
+const useGetIssues = (owner, repo, state, sortConditon, direction, perPage) => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,14 +9,10 @@ const useGetIssues = (owner, repo, perPage) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getIssue(owner, repo, perPage);
-
-        console.log(result);
+        const result = await getIssue(owner, repo, state, sortConditon, direction, perPage);
 
         if (result.success) {
-          const sortResult = result.data.sort((a, b) => b.comments - a.comments);
-
-          setIssues(sortResult);
+          setIssues(result.data);
         } else {
           setError(result.data);
         }

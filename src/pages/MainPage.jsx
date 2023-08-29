@@ -99,7 +99,7 @@ const MainPage = () => {
   const owner = 'facebook';
   const repo = 'react';
 
-  const { issues, loading, error } = useGetIssues(owner, repo, 10);
+  const { issues, loading, error } = useGetIssues(owner, repo, 'open', 'comments', 'desc', 10);
 
   if (loading) {
     return <div>Loading...</div>;
