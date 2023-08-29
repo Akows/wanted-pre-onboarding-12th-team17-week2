@@ -2,7 +2,7 @@ import { axiosClient } from './axios';
 
 export const getIssue = async (owner, repo, state, sortConditon, direction, perPage) => {
   try {
-    const response = await axiosClient.get(`asd${owner}/${repo}/issues`, {
+    const response = await axiosClient.get(`${owner}/${repo}/issues`, {
       // Git REAT API params.
       // Open 여부, 정렬 순서, 오름차/내림차순, 가져올 데이터 갯수.
       params: {
