@@ -106,8 +106,8 @@ const IssueList = () => {
                     <img
                       src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100"
                       alt="Wanted Logo"
-                      width="150"
-                      height="60"
+                      width="110"
+                      height="39"
                     />
                   </div>
                 </IssueItem>
