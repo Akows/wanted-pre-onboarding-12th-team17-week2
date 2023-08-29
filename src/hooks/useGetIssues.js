@@ -6,6 +6,10 @@ const useGetIssues = (owner, repo, state, sortConditon, direction, perPage) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const cancelError = () => {
+    setError(null);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,7 +30,7 @@ const useGetIssues = (owner, repo, state, sortConditon, direction, perPage) => {
     fetchData();
   }, [owner, repo]);
 
-  return { issues, loading, error };
+  return { issues, loading, error, cancelError };
 };
 
 export default useGetIssues;

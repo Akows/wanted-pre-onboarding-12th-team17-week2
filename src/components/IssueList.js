@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetIssues from '../hooks/useGetIssues';
+import Error from './Error';
+import IssueItemLabel from './IssueItemLabel';
 import Loading from './Loading';
 
 const ListForm = styled.ul`
@@ -9,23 +11,6 @@ const ListForm = styled.ul`
   padding: 0;
 `;
 
-const IssueItemLabel = styled.li`
-  padding: 10px;
-  background-color: #fff;
-  margin: 5px 0;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  text-align: center;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
 const IssueItem = styled.li`
   padding: 10px;
   background-color: #fff;
@@ -82,29 +67,23 @@ const Comments = styled.span`
 `;
 
 const IssueList = ({ owner, repo }) => {
-  const { issues, loading, error } = useGetIssues(owner, repo, 'open', 'comments', 'desc', 10);
+  const { issues, loading, error, cancelError } = useGetIssues(
+    owner,
+    repo,
+    'open',
+    'comments',
+    'desc',
+    10,
+  );
+
   if (loading) {
     return <Loading />;
+  } else if (error) {
+    return <Error error={error} cancelError={cancelError} />;
   } else {
     return (
       <ListForm>
-        <IssueItemLabel>
-          <Number>
-            <b>이슈 번호</b>
-          </Number>
-          <Title>
-            <b>이슈 제목</b>
-          </Title>
-          <Writer>
-            <b>작성자</b>
-          </Writer>
-          <CreatedTime>
-            <b>작성일</b>
-          </CreatedTime>
-          <Comments>
-            <b>코멘트수</b>
-          </Comments>
-        </IssueItemLabel>
+        <IssueItemLabel />
 
         {issues.map((issue, index) => (
           <React.Fragment key={issue.id}>
