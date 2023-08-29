@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getIssues } from '../api/function';
+import { getIssue } from '../api/function';
 
-const useGetIssues = (owner, repo, state, sortConditon, direction, perPage) => {
-  const [issues, setIssues] = useState([]);
+const useGetIssue = (owner, repo, state, sortConditon, direction, issueNumber) => {
+  const [issue, setIssue] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,10 +13,10 @@ const useGetIssues = (owner, repo, state, sortConditon, direction, perPage) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getIssues(owner, repo, state, sortConditon, direction, perPage);
+        const result = await getIssue(owner, repo, state, sortConditon, direction, issueNumber);
 
         if (result.success) {
-          setIssues(result.data);
+          setIssue(result.data);
         } else {
           setError(result.data);
         }
@@ -30,7 +30,7 @@ const useGetIssues = (owner, repo, state, sortConditon, direction, perPage) => {
     fetchData();
   }, [owner, repo]);
 
-  return { issues, loading, error, cancelError };
+  return { issue, loading, error, cancelError };
 };
 
-export default useGetIssues;
+export default useGetIssue;

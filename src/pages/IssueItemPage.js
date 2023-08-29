@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import useGetIssue from '../hooks/useGetIssue';
 import { checkSessionStorageValues } from '../utils/storageFunction';
 import ReactMarkdown from 'react-markdown';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 const Container = styled.div`
   margin: 20px;
@@ -57,20 +59,26 @@ export const IssueItemPage = () => {
     issueNumber,
   );
 
-  return (
-    <div>
-      <h1>Issue 상세 페이지</h1>
-      <Container>
-        <Avatar src={issue.user?.avatar_url} alt="User Avatar" />
-        <IssueNumber>이슈 번호: {issue.number}</IssueNumber>
-        <Title>{issue.title}</Title>
-        <Author>작성자: {issue.user?.login}</Author>
-        <Date>작성날짜: {issue.created_at}</Date>
-        <Comments>코멘트 수: {issue.comments}</Comments>
-        <Body>
-          <ReactMarkdown source={issue.body} />
-        </Body>
-      </Container>
-    </div>
-  );
+  if (loading) {
+    return <Loading />;
+  } else if (error) {
+    return <Error error={error} cancelError={cancelError} />;
+  } else {
+    return (
+      <div>
+        <h1>Issue 상세 페이지</h1>
+        <Container>
+          <Avatar src={issue.user?.avatar_url} alt="User Avatar" />
+          <IssueNumber>이슈 번호: {issue.number}</IssueNumber>
+          <Title>{issue.title}</Title>
+          <Author>작성자: {issue.user?.login}</Author>
+          <Date>작성날짜: {issue.created_at}</Date>
+          <Comments>코멘트 수: {issue.comments}</Comments>
+          <Body>
+            <ReactMarkdown children={issue.body} />
+          </Body>
+        </Container>
+      </div>
+    );
+  }
 };
