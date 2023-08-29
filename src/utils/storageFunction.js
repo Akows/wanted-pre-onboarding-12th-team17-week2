@@ -1,10 +1,12 @@
 const checkSessionStorageValues = () => {
-  const storedOwner = sessionStorage.getItem('owner');
-  const storedRepo = sessionStorage.getItem('repo');
+  let storedOwner = sessionStorage.getItem('owner');
+  let storedRepo = sessionStorage.getItem('repo');
 
   if (!storedOwner || !storedRepo) {
-    sessionStorage.setItem('owner', 'facebook');
-    sessionStorage.setItem('repo', 'react');
+    storedOwner = 'facebook';
+    storedRepo = 'react';
+    sessionStorage.setItem('owner', storedOwner);
+    sessionStorage.setItem('repo', storedRepo);
   }
 
   return { storedOwner, storedRepo };
