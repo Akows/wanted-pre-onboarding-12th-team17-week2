@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetIssues from '../hooks/useGetIssues';
+import { checkSessionStorageValues } from '../utils/storageFunction';
 import Error from './Error';
 import IssueItemLabel from './IssueItemLabel';
 import Loading from './Loading';
@@ -66,10 +67,12 @@ const Comments = styled.span`
   }
 `;
 
-const IssueList = ({ owner, repo }) => {
+const IssueList = () => {
+  const { storedOwner, storedRepo } = checkSessionStorageValues();
+
   const { issues, loading, error, cancelError } = useGetIssues(
-    owner,
-    repo,
+    storedOwner,
+    storedRepo,
     'open',
     'comments',
     'desc',
@@ -108,7 +111,7 @@ const IssueList = ({ owner, repo }) => {
               </Link>
             )}
 
-            <Link to={{ pathname: `/issueitem/${issue.id}` }}>
+            <Link to={{ pathname: `/issueitem/${issue.number}` }}>
               <IssueItem key={issue.id}>
                 <Number>{issue.number}</Number>
                 <Title>{issue.title}</Title>
