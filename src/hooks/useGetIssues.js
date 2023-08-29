@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchIssue } from '../api/function';
 
-const useGetIssues = (owner, repo, issueNumber, state, sortConditon, direction, perPage) => {
-  const [issue, setIssue] = useState([]);
+const useGetIssues = (owner, repo, issueNumber, state, sortCondition, direction, perPage, page) => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,28 +13,25 @@ const useGetIssues = (owner, repo, issueNumber, state, sortConditon, direction, 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (issueNumber) {
-          const result = await fetchIssue(owner, repo, issueNumber, null, null, null, null);
-          if (result.success) {
-            setIssue(result.data);
+        const result = await fetchIssue(
+          owner,
+          repo,
+          issueNumber,
+          state,
+          sortCondition,
+          direction,
+          perPage,
+          page,
+        );
+
+        if (result.success) {
+          if (issueNumber) {
+            setIssues([result.data]);
           } else {
-            setError(result.data);
+            setIssues(prevIssues => [...prevIssues, ...result.data]);
           }
         } else {
-          const result = await fetchIssue(
-            owner,
-            repo,
-            null,
-            state,
-            sortConditon,
-            direction,
-            perPage,
-          );
-          if (result.success) {
-            setIssues(result.data);
-          } else {
-            setError(result.data);
-          }
+          setError(result.data);
         }
       } catch (error) {
         setError(error);
@@ -45,9 +41,9 @@ const useGetIssues = (owner, repo, issueNumber, state, sortConditon, direction, 
     };
 
     fetchData();
-  }, [owner, repo, issueNumber, state, sortConditon, direction, perPage]);
+  }, [owner, repo, issueNumber, state, sortCondition, direction, perPage, page]);
 
-  return { issue, issues, loading, error, cancelError };
+  return { issues, loading, error, cancelError };
 };
 
 export default useGetIssues;

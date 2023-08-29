@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetIssues from '../hooks/useGetIssues';
@@ -68,7 +68,12 @@ const Comments = styled.span`
 `;
 
 const IssueList = () => {
+  const [page, setPage] = useState(1); // 현재 페이지
+  const [loadingMore, setLoadingMore] = useState(false); // 더 많은 데이터를 불러오는 중인지 여부
+
   const { storedOwner, storedRepo } = checkSessionStorageValues();
+
+  const issuesPerPage = 20; // 페이지 당 보여줄 데이터 개수
 
   const { issues, loading, error, cancelError } = useGetIssues(
     storedOwner,
@@ -77,8 +82,38 @@ const IssueList = () => {
     'open',
     'comments',
     'desc',
-    10,
+    issuesPerPage,
+    page,
   );
+
+  useEffect(() => {
+    if (loadingMore) return; // 이미 로딩 중이거나 마지막 페이지에 도달했다면 중복 호출 방지
+
+    const handleScroll = () => {
+      if (
+        !loadingMore &&
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.offsetHeight
+      ) {
+        setLoadingMore(true);
+        setPage(prevPage => prevPage + 1);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [loadingMore]);
+
+  useEffect(() => {
+    if (loadingMore) {
+      // 새로운 데이터를 불러오는 비동기 작업 수행
+      // 예를 들어, useGetIssues 함수를 사용해서 데이터를 가져오고, 가져온 데이터를 현재 issues 배열에 추가
+      setLoadingMore(false); // 로딩 상태 변경
+    }
+  }, [loadingMore]);
 
   if (loading) {
     return <Loading />;

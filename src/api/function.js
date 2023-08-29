@@ -8,6 +8,7 @@ export const fetchIssue = async (
   sortCondition,
   direction,
   perPage,
+  page,
 ) => {
   try {
     let url = `${owner}/${repo}/issues`;
@@ -26,6 +27,7 @@ export const fetchIssue = async (
       params.sort = sortCondition;
       params.direction = direction;
       params.per_page = perPage;
+      params.page = page;
     }
 
     const response = await axiosClient.get(url, {
