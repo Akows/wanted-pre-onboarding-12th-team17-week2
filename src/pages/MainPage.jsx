@@ -130,8 +130,8 @@ const MainPage = () => {
           </IssueItemLabel>
 
           {issues.map((issue, index) => (
-            <>
-              {index % 5 === 4 && (
+            <React.Fragment key={issue.id}>
+              {index % 5 === 0 && index !== 0 && (
                 <Link to="https://www.wanted.co.kr/" rel="noopener noreferrer">
                   <IssueItem>
                     <div
@@ -144,7 +144,6 @@ const MainPage = () => {
                       }}
                     >
                       <img
-                        style={{ width: '150px', height: '100%' }}
                         src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100"
                         alt="Wanted Logo"
                       />
@@ -160,7 +159,7 @@ const MainPage = () => {
                 <CreatedTime>{issue.created_at}</CreatedTime>
                 <Comments>{issue.comments}</Comments>
               </IssueItem>
-            </>
+            </React.Fragment>
           ))}
         </IssueList>
       </AppWrapper>
