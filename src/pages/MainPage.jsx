@@ -128,13 +128,17 @@ const MainPage = () => {
             </Comments>
           </IssueItemLabel>
 
-          <IssueItem>
-            <Number>번호</Number>
-            <Title>제목</Title>
-            <Writer>작성자</Writer>
-            <CreatedTime>이슈 등록 시간</CreatedTime>
-            <Comments>댓글 갯수</Comments>
-          </IssueItem>
+          {issues.map(issue => (
+            <>
+              <IssueItem key={issue.id}>
+                <Number>{issue.number}</Number>
+                <Title>{issue.title}</Title>
+                <Writer>{issue.user.login}</Writer>
+                <CreatedTime>{issue.created_at}</CreatedTime>
+                <Comments>{issue.comments}</Comments>
+              </IssueItem>
+            </>
+          ))}
         </IssueList>
       </AppWrapper>
     );
