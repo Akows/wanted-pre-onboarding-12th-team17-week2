@@ -99,7 +99,7 @@ const MainPage = () => {
   const owner = 'facebook';
   const repo = 'react';
 
-  const { issues, loading, error } = useGetIssues(owner, repo, 'open', 'comments', 'desc', 10);
+  const { issues, loading, error } = useGetIssues(owner, repo, 'open', 'comments', 'desc', 20);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -131,7 +131,7 @@ const MainPage = () => {
 
           {issues.map((issue, index) => (
             <React.Fragment key={issue.id}>
-              {index % 5 === 0 && index !== 0 && (
+              {index % 4 === 0 && index !== 0 && (
                 <Link to="https://www.wanted.co.kr/" rel="noopener noreferrer">
                   <IssueItem>
                     <div
