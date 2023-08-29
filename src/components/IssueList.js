@@ -73,6 +73,7 @@ const IssueList = () => {
   const { issues, loading, error, cancelError } = useGetIssues(
     storedOwner,
     storedRepo,
+    null,
     'open',
     'comments',
     'desc',

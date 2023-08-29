@@ -23,7 +23,7 @@ export const getIssues = async (owner, repo, state, sortConditon, direction, per
   }
 };
 
-export const getIssue = async (owner, repo, state, sortConditon, direction, issueNumber) => {
+export const getIssue = async (owner, repo, issueNumber) => {
   try {
     const response = await axiosClient.get(`${owner}/${repo}/issues/${issueNumber}`);
 

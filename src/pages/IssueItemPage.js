@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import useGetIssue from '../hooks/useGetIssue';
 import { checkSessionStorageValues } from '../utils/storageFunction';
 import ReactMarkdown from 'react-markdown';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
+import useGetIssues from '../hooks/useGetIssues';
 
 const BackGround = styled.div`
   display: flex;
@@ -75,13 +75,14 @@ export const IssueItemPage = () => {
 
   const { storedOwner, storedRepo } = checkSessionStorageValues();
 
-  const { issue, loading, error, cancelError } = useGetIssue(
+  const { issue, loading, error, cancelError } = useGetIssues(
     storedOwner,
     storedRepo,
-    'open',
-    'comments',
-    'desc',
     issueNumber,
+    null,
+    null,
+    null,
+    null,
   );
 
   if (loading) {
