@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetIssue from '../hooks/useGetIssue';
 import { checkSessionStorageValues } from '../utils/storageFunction';
@@ -46,6 +46,8 @@ const Body = styled.div`
 `;
 
 export const IssueItemPage = () => {
+  const navigate = useNavigate();
+
   const { issueNumber } = useParams();
 
   const { storedOwner, storedRepo } = checkSessionStorageValues();
@@ -66,7 +68,7 @@ export const IssueItemPage = () => {
   } else {
     return (
       <div>
-        <h1>Issue 상세 페이지</h1>
+        <h1>Issue 상세 페이지</h1> <button onClick={() => navigate(-1)}>뒤로 가기</button>
         <Container>
           <Avatar src={issue.user?.avatar_url} alt="User Avatar" />
           <IssueNumber>이슈 번호: {issue.number}</IssueNumber>
@@ -74,6 +76,7 @@ export const IssueItemPage = () => {
           <Author>작성자: {issue.user?.login}</Author>
           <Date>작성날짜: {issue.created_at}</Date>
           <Comments>코멘트 수: {issue.comments}</Comments>
+          <hr />
           <Body>
             <ReactMarkdown children={issue.body} />
           </Body>
