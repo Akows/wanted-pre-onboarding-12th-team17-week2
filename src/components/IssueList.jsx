@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetIssues from '../hooks/useGetIssues';
+import Loading from './Loading';
 
 const ListForm = styled.ul`
   list-style: none;
@@ -83,7 +84,7 @@ const Comments = styled.span`
 const IssueList = ({ owner, repo }) => {
   const { issues, loading, error } = useGetIssues(owner, repo, 'open', 'comments', 'desc', 10);
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   } else {
     return (
       <ListForm>
