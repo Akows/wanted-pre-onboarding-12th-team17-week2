@@ -100,43 +100,45 @@ const MainPage = () => {
 
   const { issues, loading, error } = useGetIssues(owner, repo);
 
-  console.log(issues);
+  if (loading) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <AppWrapper>
+        <Header>
+          {owner} / {repo}
+        </Header>
 
-  return (
-    <AppWrapper>
-      <Header>
-        {owner} / {repo}
-      </Header>
+        <IssueList>
+          <IssueItemLabel>
+            <Number>
+              <b>이슈 번호</b>
+            </Number>
+            <Title>
+              <b>이슈 제목</b>
+            </Title>
+            <Writer>
+              <b>작성자</b>
+            </Writer>
+            <CreatedTime>
+              <b>이슈 등록 시간</b>
+            </CreatedTime>
+            <Comments>
+              <b>댓글 갯수</b>
+            </Comments>
+          </IssueItemLabel>
 
-      <IssueList>
-        <IssueItemLabel>
-          <Number>
-            <b>이슈 번호</b>
-          </Number>
-          <Title>
-            <b>이슈 제목</b>
-          </Title>
-          <Writer>
-            <b>작성자</b>
-          </Writer>
-          <CreatedTime>
-            <b>이슈 등록 시간</b>
-          </CreatedTime>
-          <Comments>
-            <b>댓글 갯수</b>
-          </Comments>
-        </IssueItemLabel>
-
-        <IssueItem>
-          <Number>번호</Number>
-          <Title>제목</Title>
-          <Writer>작성자</Writer>
-          <CreatedTime>이슈 등록 시간</CreatedTime>
-          <Comments>댓글 갯수</Comments>
-        </IssueItem>
-      </IssueList>
-    </AppWrapper>
-  );
+          <IssueItem>
+            <Number>번호</Number>
+            <Title>제목</Title>
+            <Writer>작성자</Writer>
+            <CreatedTime>이슈 등록 시간</CreatedTime>
+            <Comments>댓글 갯수</Comments>
+          </IssueItem>
+        </IssueList>
+      </AppWrapper>
+    );
+  }
 };
 
 export default MainPage;
