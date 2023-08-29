@@ -99,7 +99,7 @@ const MainPage = () => {
   const owner = 'facebook';
   const repo = 'react';
 
-  const { issues, loading, error } = useGetIssues(owner, repo);
+  const { issues, loading, error } = useGetIssues(owner, repo, 10);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -122,10 +122,10 @@ const MainPage = () => {
               <b>작성자</b>
             </Writer>
             <CreatedTime>
-              <b>이슈 등록 시간</b>
+              <b>작성일</b>
             </CreatedTime>
             <Comments>
-              <b>댓글 갯수</b>
+              <b>코멘트수</b>
             </Comments>
           </IssueItemLabel>
 
