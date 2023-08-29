@@ -75,7 +75,7 @@ export const IssueItemPage = () => {
 
   const { storedOwner, storedRepo } = checkSessionStorageValues();
 
-  const { issue, loading, error, cancelError } = useGetIssues(
+  const { issues, loading, error, cancelError } = useGetIssues(
     storedOwner,
     storedRepo,
     issueNumber,
@@ -83,6 +83,7 @@ export const IssueItemPage = () => {
     null,
     null,
     null,
+    1,
   );
 
   if (loading) {
@@ -95,15 +96,15 @@ export const IssueItemPage = () => {
         <Header />
         <BackButton onClick={() => navigate(-1)}>뒤로 가기</BackButton>
         <Container>
-          <Avatar src={issue.user?.avatar_url} alt="User Avatar" />
-          <IssueNumber>이슈 번호: {issue.number}</IssueNumber>
-          <Title>{issue.title}</Title>
-          <Author>작성자: {issue.user?.login}</Author>
-          <Date>작성날짜: {issue.created_at}</Date>
-          <Comments>코멘트 수: {issue.comments}</Comments>
+          <Avatar src={issues.user?.avatar_url} alt="User Avatar" />
+          <IssueNumber>이슈 번호: {issues.number}</IssueNumber>
+          <Title>{issues.title}</Title>
+          <Author>작성자: {issues.user?.login}</Author>
+          <Date>작성날짜: {issues.created_at}</Date>
+          <Comments>코멘트 수: {issues.comments}</Comments>
           <hr />
           <Body>
-            <ReactMarkdown children={issue.body} />
+            <ReactMarkdown children={issues.body} />
           </Body>
         </Container>
       </BackGround>

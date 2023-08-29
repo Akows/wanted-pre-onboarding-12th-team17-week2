@@ -26,7 +26,7 @@ const useGetIssues = (owner, repo, issueNumber, state, sortCondition, direction,
 
         if (result.success) {
           if (issueNumber) {
-            setIssues([result.data]);
+            setIssues(result.data);
           } else {
             setIssues(prevIssues => [...prevIssues, ...result.data]);
           }
