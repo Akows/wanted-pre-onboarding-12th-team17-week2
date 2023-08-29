@@ -108,13 +108,15 @@ const IssueList = ({ owner, repo }) => {
               </Link>
             )}
 
-            <IssueItem key={issue.id}>
-              <Number>{issue.number}</Number>
-              <Title>{issue.title}</Title>
-              <Writer>{issue.user.login}</Writer>
-              <CreatedTime>{issue.created_at}</CreatedTime>
-              <Comments>{issue.comments}</Comments>
-            </IssueItem>
+            <Link to={{ pathname: `/issueitem/${issue.id}` }}>
+              <IssueItem key={issue.id}>
+                <Number>{issue.number}</Number>
+                <Title>{issue.title}</Title>
+                <Writer>{issue.user.login}</Writer>
+                <CreatedTime>{issue.created_at}</CreatedTime>
+                <Comments>{issue.comments}</Comments>
+              </IssueItem>
+            </Link>
           </React.Fragment>
         ))}
       </ListForm>
