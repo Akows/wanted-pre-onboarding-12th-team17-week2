@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetIssues from '../hooks/useGetIssues';
 
@@ -128,8 +129,30 @@ const MainPage = () => {
             </Comments>
           </IssueItemLabel>
 
-          {issues.map(issue => (
+          {issues.map((issue, index) => (
             <>
+              {index % 5 === 4 && (
+                <Link to="https://www.wanted.co.kr/" rel="noopener noreferrer">
+                  <IssueItem>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100%',
+                        width: '100%',
+                      }}
+                    >
+                      <img
+                        style={{ width: '150px', height: '100%' }}
+                        src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100"
+                        alt="Wanted Logo"
+                      />
+                    </div>
+                  </IssueItem>
+                </Link>
+              )}
+
               <IssueItem key={issue.id}>
                 <Number>{issue.number}</Number>
                 <Title>{issue.title}</Title>
