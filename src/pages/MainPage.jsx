@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import useGetIssues from '../hooks/useGetIssues';
 
 const AppWrapper = styled.div`
   font-family: Arial, sans-serif;
@@ -96,6 +97,10 @@ const Comments = styled.span`
 const MainPage = () => {
   const owner = 'facebook';
   const repo = 'react';
+
+  const { issues, loading, error } = useGetIssues(owner, repo);
+
+  console.log(issues);
 
   return (
     <AppWrapper>
