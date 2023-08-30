@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetIssues from '../hooks/useGetIssues';
+import useOctokit from '../hooks/useOctokit';
 import { checkSessionStorageValues } from '../utils/storageFunction';
 import Error from './Error';
 import Header from './Header';
@@ -76,7 +77,20 @@ const IssueList = () => {
 
   const issuesPerPage = 20; // 페이지 당 보여줄 데이터 개수
 
-  const { issues, loading, error, cancelError } = useGetIssues(
+  // 과제 진행중 사용 가능한 라이브러리 목록에 Octokit이 추가되어 커스텀 훅을 하나 새로 생성함.
+  // 기존에 사용하던 Axios 방식은 삭제는 하지 않고 주석처리하여 기록으로 남김.
+  // const { issues, loading, error, cancelError } = useGetIssues(
+  //   storedOwner,
+  //   storedRepo,
+  //   null,
+  //   'open',
+  //   'comments',
+  //   'desc',
+  //   issuesPerPage,
+  //   page,
+  // );
+
+  const { issues, loading, error, cancelError } = useOctokit(
     storedOwner,
     storedRepo,
     null,

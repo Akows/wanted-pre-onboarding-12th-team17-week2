@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import useGetIssues from '../hooks/useGetIssues';
+import useOctokit from '../hooks/useOctokit';
 
 const BackGround = styled.div`
   display: flex;
@@ -75,7 +76,20 @@ export const IssueItemPage = () => {
 
   const { storedOwner, storedRepo } = checkSessionStorageValues();
 
-  const { issues, loading, error, cancelError } = useGetIssues(
+  // 과제 진행중 사용 가능한 라이브러리 목록에 Octokit이 추가되어 커스텀 훅을 하나 새로 생성함.
+  // 기존에 사용하던 Axios 방식은 삭제는 하지 않고 주석처리하여 기록으로 남김.
+  // const { issues, loading, error, cancelError } = useGetIssues(
+  //   storedOwner,
+  //   storedRepo,
+  //   issueNumber,
+  //   null,
+  //   null,
+  //   null,
+  //   null,
+  //   1,
+  // );
+
+  const { issues, loading, error, cancelError } = useOctokit(
     storedOwner,
     storedRepo,
     issueNumber,

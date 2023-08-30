@@ -7,13 +7,4 @@ export const axiosClient = axios.create({
   headers: {
     Authorization: token,
   },
-
-  // auth: token,
 });
-
-// axiosClient.interceptors.request.use(config => {
-//   if (token) {
-//     config.headers.Authorization = `token ${token}`;
-//   }
-//   return config;
-// });
