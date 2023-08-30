@@ -91,6 +91,30 @@ $ npm run start
 
 ### 코딩 컨벤션 [🔗Link](https://shorturl.at/dAO08)
 
+## 🔥🔥 트러블 슈팅
+
+#### Git REST API 호출시 .env 파일에 작성한 환경 변수 파일을 프로젝트에서 제대로 사용하지 못하는 문제.
+
+#### 광고 이미지가 5번째 셀 마다 제대로 출력되지 않는 문제.
+
+#### Git REST API 호출시 엑세스 토큰이 제대로 적용되지 않는 문제.
+
+#### SessionStorage 사용시 저장소 내부의 데이터가 컴포넌트 렌더링 이후 호출되어 undefined 관련 에러가 발생하는 문제.
+
+## 🐿️ 프로젝트 성능 진단
+### 메인 페이지
+![image](https://github.com/Akows/wanted-pre-onboarding-12th-team17-week2/assets/54127322/49d36e2d-793d-4837-8ddf-71c8cdd70d48)
+
+#### 감사 지적 사항
+- 목록에 <li> 요소와 스크립트 지원 요소(<script> 및 <template>)만 포함되지 않음.
+- 목록 항목(<li>)이 <ul>, <ol> 또는 <menu> 상위 요소 내에 포함되지 않음
+-> Link 태그 적용으로 목록 항목의 상위 요소가 ul에서 Link로 변경되었음. 수정 예정.
+
+
+### 상세 페이지
+![image](https://github.com/Akows/wanted-pre-onboarding-12th-team17-week2/assets/54127322/31a4d72b-6c89-4148-b625-4809c2fea5e8)
+
+
 ## 🌲프로젝트 구조
 ```bash
 src
