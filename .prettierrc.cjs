@@ -6,6 +6,7 @@ module.exports = {
   tabWidth: 2,
   bracketSpacing: true,
   bracketSameLine: false,
+  endOfLine: 'auto',
   overrides: [
     {
       files: '*.env',
