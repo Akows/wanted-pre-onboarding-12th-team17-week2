@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
 import IssueList from '../components/IssueList';
 
 const AppWrapper = styled.div`
@@ -16,8 +15,6 @@ const AppWrapper = styled.div`
 const MainPage = () => {
   return (
     <AppWrapper>
-      <Header />
-
       <IssueList />
     </AppWrapper>
   );

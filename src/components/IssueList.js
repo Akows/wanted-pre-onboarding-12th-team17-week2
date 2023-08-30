@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetIssues from '../hooks/useGetIssues';
 import { checkSessionStorageValues } from '../utils/storageFunction';
 import Error from './Error';
+import Header from './Header';
 import IssueItemLabel from './IssueItemLabel';
 import Loading from './Loading';
 
@@ -121,46 +122,50 @@ const IssueList = () => {
     return <Error error={error} cancelError={cancelError} />;
   } else {
     return (
-      <ListForm>
-        <IssueItemLabel />
+      <>
+        <Header />
 
-        {issues.map((issue, index) => (
-          <React.Fragment key={issue.id}>
-            {index % 4 === 0 && index !== 0 && (
-              <Link to="https://www.wanted.co.kr/" rel="noopener noreferrer">
-                <IssueItem>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      height: '100%',
-                      width: '100%',
-                    }}
-                  >
-                    <img
-                      src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100"
-                      alt="Wanted Logo"
-                      width="110"
-                      height="39"
-                    />
-                  </div>
+        <ListForm>
+          <IssueItemLabel />
+
+          {issues.map((issue, index) => (
+            <React.Fragment key={issue.id}>
+              {index % 4 === 0 && index !== 0 && (
+                <Link to="https://www.wanted.co.kr/" rel="noopener noreferrer">
+                  <IssueItem>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100%',
+                        width: '100%',
+                      }}
+                    >
+                      <img
+                        src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100"
+                        alt="Wanted Logo"
+                        width="110"
+                        height="39"
+                      />
+                    </div>
+                  </IssueItem>
+                </Link>
+              )}
+
+              <Link to={{ pathname: `/issueitem/${issue.number}` }}>
+                <IssueItem key={issue.id}>
+                  <Number>{issue.number}</Number>
+                  <Title>{issue.title}</Title>
+                  <Writer>{issue.user.login}</Writer>
+                  <CreatedTime>{issue.created_at}</CreatedTime>
+                  <Comments>{issue.comments}</Comments>
                 </IssueItem>
               </Link>
-            )}
-
-            <Link to={{ pathname: `/issueitem/${issue.number}` }}>
-              <IssueItem key={issue.id}>
-                <Number>{issue.number}</Number>
-                <Title>{issue.title}</Title>
-                <Writer>{issue.user.login}</Writer>
-                <CreatedTime>{issue.created_at}</CreatedTime>
-                <Comments>{issue.comments}</Comments>
-              </IssueItem>
-            </Link>
-          </React.Fragment>
-        ))}
-      </ListForm>
+            </React.Fragment>
+          ))}
+        </ListForm>
+      </>
     );
   }
 };
