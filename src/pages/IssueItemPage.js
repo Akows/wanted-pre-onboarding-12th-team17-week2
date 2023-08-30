@@ -94,7 +94,7 @@ export const IssueItemPage = () => {
     return (
       <BackGround>
         <Header />
-        <BackButton onClick={() => navigate(-1)}>뒤로 가기</BackButton>
+        <BackButton onClick={() => navigate('/')}>뒤로 가기</BackButton>
         <Container>
           <Avatar src={issues.user?.avatar_url} alt="User Avatar" />
           <IssueNumber>이슈 번호: {issues.number}</IssueNumber>
