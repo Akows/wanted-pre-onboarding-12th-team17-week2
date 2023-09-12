@@ -52,8 +52,6 @@ $ npm run start
 
 ## ✨ Assignments별 구현 방식
 
-#### 과제 소개 [🔗Link](https://lean-mahogany-686.notion.site/Week-2-a28eb717312a434498ea431d2ff8fc17)
-
 #### [Assignment 1] 이슈 데이터 가져오기
 
 - Axios를 이용, 비동기 통신으로 API를 호출하여 데이터를 받음.
